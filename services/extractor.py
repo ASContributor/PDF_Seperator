@@ -1,11 +1,12 @@
 import re
 from unittest import result
+from config import INDEX_SEARCH_PAGES, VERSION_PATTERN
 
 
 def extract_version(filename):
      
     
-    match = re.search(r"RES\s+(\d+\.\d+)", filename)
+    match = re.search(VERSION_PATTERN, filename)
     if match:
         return match.group(1)
     return None
@@ -18,7 +19,7 @@ import re
 def extract_index(reader):
     index = []
 
-    for i in range(3):
+    for i in range(INDEX_SEARCH_PAGES):
         text = reader.pages[i].extract_text()
 
         if not text:
